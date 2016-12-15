@@ -1,3 +1,7 @@
+## Cook County Development
+
+Work in progress to adapt this for Cook County. Cook focused work will occure in dev-cook and other branches. For now "master" will be kept as a clean fork of 18F's master.
+
 ## Analytics Reporter
 
 A lightweight system for publishing analytics data from Google Analytics profiles. Uses the [Google Analytics Core Reporting API v3](https://developers.google.com/analytics/devguides/reporting/core/v3/) and the [Google Analytics Real Time API v3](https://developers.google.com/analytics/devguides/reporting/realtime/v3/).
