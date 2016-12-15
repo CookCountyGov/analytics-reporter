@@ -1,4 +1,6 @@
-./.env.ps1
+# Find and load the .env.ps1 file
+$scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+. $scriptDir\.env.ps1
 
 # JSON 
 

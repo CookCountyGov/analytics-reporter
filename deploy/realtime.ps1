@@ -1,5 +1,6 @@
-./.env.ps1
-
+# Find and load the .env.ps1 file
+$scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+. $scriptDir\.env.ps1
 
 # JSON 
 
@@ -16,3 +17,5 @@ $env_path = Join-Path $env:HOME \deploy\envs\cookcountyilgov.env.ps1
 node $env:HOME\bin\analytics --output $env:DATA_PATH --frequency=realtime --slim --verbose
 node $env:HOME\bin\analytics --output $env:DATA_PATH --only=all-pages-realtime --slim --verbose --csv
 . $env:S3BROWSER sync $env:S3BROWSER_ACCOUNT $env:DATA_PATH $env:AWS_PATH ncdhs
+"Ready to exit..."
+exit
