@@ -11,3 +11,4 @@
 todo.txt
 npm-debug.log
 *.swp
+*.env.ps1
