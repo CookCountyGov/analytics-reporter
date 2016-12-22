@@ -381,6 +381,63 @@
         "name": "Top Exit Pages (30 Days)",
         "description": "Last 30 days' Exit page paths, measured by visits, for all sites."
       }
+    },
+    
+    {
+      "name": "top-cities-realtime",
+      "frequency": "realtime",
+      "realtime": true,
+      "query": {
+        "dimensions": ["rt:city"],
+        "metrics": ["rt:activeUsers"],
+        "sort": "-rt:activeUsers"
+      },
+      "meta": {
+        "name": "Top Cities (Live)",
+        "description": "Top cities for active onsite users."
+      }
+    },
+    
+    {
+      "name": "top-downloads-yesterday",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath"],
+        "metrics": ["ga:totalEvents"],
+        "filters": [
+          "ga:eventCategory=~ownload",
+          "ga:pagePath!~(usps.com).*\/(?i)(zip|doc).*"
+        ],
+        "start-date": "yesterday",
+        "end-date": "yesterday",
+        "sort": "-ga:totalEvents",
+        "max-results": "100"
+      },
+      "meta": {
+        "name": "Top Downloads Yesterday",
+        "description": "Top downloads yesterday"
+      }
+    },
+    {
+      "name": "top-downloads-7-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath"],
+        "metrics": ["ga:totalEvents"],
+        "filters": [
+          "ga:eventCategory=~ownload",
+          "ga:eventLabel!~swf$",
+          "ga:pagePath!~(usps.com).*\/(?i)(zip|doc).*"
+        ],
+        "start-date": "7daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:totalEvents",
+        "max-results": "100"
+      },
+      "meta": {
+        "name": "Top Downloads (7 Days)",
+        "description": "Top downloads in the last 7 days."
+      }
     }
 
   ]
