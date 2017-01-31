@@ -455,7 +455,7 @@
       "name": "top-downloads-yesterday",
       "frequency": "daily",
       "query": {
-        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath"],
+        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath", "ga:hostname"],
         "metrics": ["ga:totalEvents"],
         "filters": [
           "ga:eventCategory=~ownload",
@@ -475,7 +475,7 @@
       "name": "top-downloads-7-days",
       "frequency": "daily",
       "query": {
-        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath"],
+        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath", "ga:hostname"],
         "metrics": ["ga:totalEvents"],
         "filters": [
           "ga:eventCategory=~ownload",
