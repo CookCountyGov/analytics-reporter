@@ -574,9 +574,7 @@
           "ga:entrances",
           "ga:bounces",
           "ga:exits",
-          "ga:users",
-          "ga:pageviewsPerSession",
-          "ga:avgSessionDuration"],
+          "ga:users"],
         "start-date": "yesterday",
         "end-date": "yesterday",
         "sort": "-ga:sessions"
