@@ -42,7 +42,6 @@
         "description": "90 days of desktop/mobile/tablet visits for all sites."
       }
     },
-
     {
       "name": "screen-size",
       "frequency": "daily",
@@ -60,7 +59,6 @@
         "description": "90 days of Screen Resolution visits for all sites."
       }
     },
-
     {
       "name": "language",
       "frequency": "daily",
@@ -78,8 +76,6 @@
         "description": "90 days of visits by browser language for all sites. (>1000 sessions)"
       }
     },
-
-
     {
       "name": "device_model",
       "frequency": "daily",
@@ -277,7 +273,6 @@
         "description": "Last 30 days' top 20 domains, measured by visits, for all sites."
       }
     },
-
     {
       "name": "top-landing-pages-30-days",
       "frequency": "daily",
@@ -294,7 +289,6 @@
         "description": "Last 30 days' Landing Pages, measured by visits, for all sites."
       }
     },
-
     {
       "name": "top-traffic-sources-30-days",
       "frequency": "daily",
@@ -311,7 +305,6 @@
         "description": "Last 30 days' Traffic Sources, measured by visits, for all sites."
       }
     },
-
     {
       "name": "top-exit-pages-30-days",
       "frequency": "daily",
@@ -456,24 +449,6 @@
         "name": "All Pages (Live)",
         "description": "Pages, measured by active onsite users, for all sites."
       }
-    },
-    {
-      "name": "all-domains-30-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:hostname"],
-        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
-        "start-date": "30daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions",
-        "max-results": "10000",
-        "filters": ["ga:sessions>=1000"]
-      },
-      "meta": {
-        "name": "All Domains (30 Days)",
-        "description": "Last 30 days' domains, measured by visits, for all sites."
-      }
     }
-
   ]
 }

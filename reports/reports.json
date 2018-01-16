@@ -27,36 +27,6 @@
       }
     },
     {
-      "name": "last-48-hours",
-      "frequency": "realtime",
-      "query": {
-        "dimensions": ["ga:date", "ga:hour"],
-        "metrics": ["ga:sessions"],
-        "start-date": "yesterday",
-        "end-date": "today"
-      },
-      "meta": {
-        "name": "Today",
-        "description": "Today's visits for all sites."
-      }
-    },
-    {
-      "name": "users",
-      "frequency": "daily",
-      "slim": true,
-      "query": {
-        "dimensions": ["ga:date"],
-        "metrics": ["ga:sessions"],
-        "start-date": "90daysAgo",
-        "end-date": "yesterday",
-        "sort": "ga:date"
-      },
-      "meta": {
-        "name": "Visitors",
-        "description": "90 days of visits for all sites."
-      }
-    },
-    {
       "name": "devices",
       "frequency": "daily",
       "slim": true,
@@ -70,22 +40,6 @@
       "meta": {
         "name": "Devices",
         "description": "90 days of desktop/mobile/tablet visits for all sites."
-      }
-    },
-    {
-      "name": "os",
-      "frequency": "daily",
-      "slim": true,
-      "query": {
-        "dimensions": ["ga:date" ,"ga:operatingSystem"],
-        "metrics": ["ga:sessions"],
-        "start-date": "90daysAgo",
-        "end-date": "yesterday",
-        "sort": "ga:date"
-      },
-      "meta": {
-        "names": "Operating Systems",
-        "description": "90 days of visits, broken down by operating system and date, for all sites."
       }
     },
     {
@@ -125,7 +79,7 @@
       "frequency": "daily",
       "slim": true,
       "query": {
-        "dimensions": ["ga:date" ,"ga:mobileDeviceModel"],
+        "dimensions": ["ga:date" ,"ga:deviceCategory" , "ga:mobileDeviceBranding", "ga:mobileDeviceModel"],
         "metrics": ["ga:sessions"],
         "start-date": "90daysAgo",
         "end-date": "yesterday",
@@ -134,6 +88,22 @@
       "meta": {
         "name": "Device Model",
         "description": "90 days of visits by Device Model for all sites."
+      }
+    },
+    {
+      "name": "os",
+      "frequency": "daily",
+      "slim": true,
+      "query": {
+        "dimensions": ["ga:date" ,"ga:operatingSystem"],
+        "metrics": ["ga:sessions"],
+        "start-date": "90daysAgo",
+        "end-date": "yesterday",
+        "sort": "ga:date"
+      },
+      "meta": {
+        "names": "Operating Systems",
+        "description": "90 days of visits, broken down by operating system and date, for all sites."
       }
     },
     {
@@ -257,6 +227,262 @@
       }
     },
     {
+      "name": "top-domains-7-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:hostname"],
+        "metrics": ["ga:sessions"],
+        "start-date": "7daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions",
+        "max-results": "20"
+      },
+      "meta": {
+        "name": "Top Domains (7 Days)",
+        "description": "Last week's top 20 domains, measured by visits, for all sites."
+      }
+    },
+    {
+      "name": "top-domains-30-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:hostname"],
+        "metrics": ["ga:sessions", "ga:users", "ga:pageviews", "ga:pageviewsPerSession", "ga:avgSessionDuration","ga:exits"],
+        "start-date": "30daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions",
+        "max-results": "20"
+      },
+      "meta": {
+        "name": "Top Domains (30 Days)",
+        "description": "Last 30 days' top 20 domains, measured by visits, for all sites."
+      }
+    },
+    {
+      "name": "top-landing-pages-30-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:landingPagePath"],
+        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
+        "start-date": "30daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions",
+        "max-results": "20"
+      },
+      "meta": {
+        "name": "Top Landing Pages (30 Days)",
+        "description": "Last 30 days' Landing Pages, measured by visits, for all sites."
+      }
+    },
+    {
+      "name": "top-traffic-sources-30-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:source", "ga:hasSocialSourceReferral"],
+        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
+        "start-date": "30daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions",
+        "max-results": "20"
+      },
+      "meta": {
+        "name": "Top Traffic Sources (30 Days)",
+        "description": "Last 30 days' Traffic sources, measured by visits, for all sites."
+      }
+    },
+    {
+      "name": "top-exit-pages-30-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:exitPagePath"],
+        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
+        "start-date": "30daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions",
+        "max-results": "20"
+      },
+      "meta": {
+        "name": "Top Exit Pages (30 Days)",
+        "description": "Last 30 days' Exit page paths, measured by visits, for all sites."
+      }
+    },
+    {
+      "name": "second-level-domains",
+      "frequency": "daily",
+      "cut": ["ga:sessions"],
+      "query": {
+        "dimensions": ["ga:hostname"],
+        "metrics": ["ga:sessions"],
+        "filters": [
+          "ga:hostname=~^[^\\.]+\\.[^\\.]+$"
+        ],
+        "start-date": "14daysAgo",
+        "end-date": "yesterday",
+        "sort": "ga:hostname",
+        "max-results": 10000
+      },
+      "meta": {
+        "name": "Participating second-level domains.",
+        "description": "Participating second-level domains over the last 2 weeks."
+      }
+    },
+    {
+      "name": "sites",
+      "frequency": "daily",
+      "cut": ["ga:sessions"],
+      "query": {
+        "dimensions": ["ga:hostname"],
+        "metrics": ["ga:sessions"],
+        "filters": [
+          "ga:sessions>0"
+        ],
+        "start-date": "14daysAgo",
+        "end-date": "yesterday",
+        "sort": "ga:hostname",
+        "max-results": 10000
+      },
+      "meta": {
+        "name": "Participating hostnames.",
+        "description": "Participating hostnames over the last 30 days with at least 1 visit."
+      }
+    },
+    {
+      "name": "top-downloads-yesterday",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath", "ga:hostname"],
+        "metrics": ["ga:totalEvents"],
+        "filters": [
+          "ga:eventCategory=~ownload",
+          "ga:pagePath!~(usps.com).*\/(?i)(zip|doc).*"
+        ],
+        "start-date": "yesterday",
+        "end-date": "yesterday",
+        "sort": "-ga:totalEvents",
+        "max-results": "100"
+      },
+      "meta": {
+        "name": "Top Downloads Yesterday",
+        "description": "Top downloads yesterday"
+      }
+    },
+    {
+      "name": "top-downloads-7-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath", "ga:hostname"],
+        "metrics": ["ga:totalEvents"],
+        "filters": [
+          "ga:eventCategory=~ownload",
+          "ga:eventLabel!~swf$",
+          "ga:pagePath!~(usps.com).*\/(?i)(zip|doc).*"
+        ],
+        "start-date": "7daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:totalEvents",
+        "max-results": "100"
+      },
+      "meta": {
+        "name": "Top Downloads (7 Days)",
+        "description": "Top downloads in the last 7 days."
+      }
+    },
+    {
+      "name": "top-cities-realtime",
+      "frequency": "realtime",
+      "realtime": true,
+      "query": {
+        "dimensions": ["rt:city", "rt:region"],
+        "metrics": ["rt:activeUsers"],
+        "sort": "-rt:activeUsers"
+      },
+      "meta": {
+        "name": "Top Cities (Live)",
+        "description": "Top cities for active onsite users."
+      }
+    },
+    {
+      "name": "all-pages-realtime",
+      "frequency": "realtime",
+      "realtime": true,
+      "threshold": {
+        "field": "rt:activeUsers",
+        "value": "2"
+      },
+      "query": {
+        "dimensions": ["rt:pagePath", "rt:pageTitle"],
+        "metrics": ["rt:activeUsers"],
+        "sort": "-rt:activeUsers",
+        "max-results": "10000"
+      },
+      "meta": {
+        "name": "All Pages (Live)",
+        "description": "Pages, measured by active onsite users, for all sites."
+      }
+    },
+    {
+      "name": "all-domains-30-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:hostname"],
+        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
+        "start-date": "30daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions",
+        "max-results": "10000",
+        "filters": ["ga:sessions>=1"]
+      },
+      "meta": {
+        "name": "All Domains (30 Days)",
+        "description": "Last 30 days' domains, measured by visits, for all sites."
+      }
+    },
+    {
+      "name": "top-cities-7-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:city", "ga:region"],
+        "metrics": ["ga:sessions"],
+        "start-date": "7daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions"
+      },
+      "meta": {
+        "name": "Top Cities (7 days)",
+        "description": "7 days of visits for all sites."
+      }
+    },
+    {
+      "name": "last-48-hours",
+      "frequency": "realtime",
+      "query": {
+        "dimensions": ["ga:date", "ga:hour"],
+        "metrics": ["ga:sessions"],
+        "start-date": "yesterday",
+        "end-date": "today"
+      },
+      "meta": {
+        "name": "Last 48 hours",
+        "description": "Last 48 hours visits for all sites."
+      }
+    },
+    {
+      "name": "users",
+      "frequency": "daily",
+      "slim": true,
+      "query": {
+        "dimensions": ["ga:date"],
+        "metrics": ["ga:sessions"],
+        "start-date": "90daysAgo",
+        "end-date": "yesterday",
+        "sort": "ga:date"
+      },
+      "meta": {
+        "name": "Visitors",
+        "description": "90 days of visits for all sites."
+      }
+    },    
+    {
       "name": "top-pages-7-days",
       "frequency": "daily",
       "query": {
@@ -305,125 +531,10 @@
       }
     },
     {
-      "name": "top-domains-7-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:hostname"],
-        "metrics": ["ga:sessions"],
-        "start-date": "7daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions",
-        "max-results": "20"
-      },
-      "meta": {
-        "name": "Top Domains (7 Days)",
-        "description": "Last week's top 20 domains, measured by visits, for all sites."
-      }
-    },
-    {
-      "name": "top-domains-30-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:hostname"],
-        "metrics": ["ga:sessions", "ga:users", "ga:pageviews", "ga:pageviewsPerSession", "ga:avgSessionDuration","ga:exits"],
-        "start-date": "30daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions",
-        "max-results": "20"
-      },
-      "meta": {
-        "name": "Top Domains (30 Days)",
-        "description": "Last 30 days' top 20 domains, measured by visits, for all sites."
-      }
-    },
-
-    {
-      "name": "top-landing-pages-30-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:landingPagePath"],
-        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
-        "start-date": "30daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions",
-        "max-results": "20"
-      },
-      "meta": {
-        "name": "Top Landing Pages (30 Days)",
-        "description": "Last 30 days' Landing Pages, measured by visits, for all sites."
-      }
-    },
-
-    {
-      "name": "top-traffic-sources-30-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:source", "ga:hasSocialSourceReferral"],
-        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
-        "start-date": "30daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions",
-        "max-results": "20"
-      },
-      "meta": {
-        "name": "Top Traffic Sources (30 Days)",
-        "description": "Last 30 days' Traffic sources, measured by visits, for all sites."
-      }
-    },
-
-    {
-      "name": "top-exit-pages-30-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:exitPagePath"],
-        "metrics": ["ga:sessions", "ga:pageviews", "ga:users", "ga:pageviewsPerSession", "ga:avgSessionDuration", "ga:exits"],
-        "start-date": "30daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions",
-        "max-results": "20"
-      },
-      "meta": {
-        "name": "Top Exit Pages (30 Days)",
-        "description": "Last 30 days' Exit page paths, measured by visits, for all sites."
-      }
-    },
-    
-    {
-      "name": "top-cities-realtime",
-      "frequency": "realtime",
-      "realtime": true,
-      "query": {
-        "dimensions": ["rt:city"],
-        "metrics": ["rt:activeUsers"],
-        "sort": "-rt:activeUsers"
-      },
-      "meta": {
-        "name": "Top Cities (Live)",
-        "description": "Top cities for active onsite users."
-      }
-    },
-
-    {
-      "name": "top-cities-7-days",
-      "frequency": "daily",
-      "query": {
-        "dimensions": ["ga:city"],
-        "metrics": ["ga:sessions"],
-        "start-date": "7daysAgo",
-        "end-date": "yesterday",
-        "sort": "-ga:sessions"
-      },
-      "meta": {
-        "name": "Top Cities (7 days)",
-        "description": "7 days of visits for all sites."
-      }
-    },
-
-    {
       "name": "top-cities-30-days",
       "frequency": "daily",
       "query": {
-        "dimensions": ["ga:city"],
+        "dimensions": ["ga:city", "ga:region"],
         "metrics": ["ga:sessions"],
         "start-date": "30daysAgo",
         "end-date": "yesterday",
@@ -434,12 +545,11 @@
         "description": "30 days of visits for all sites."
       }
     },
-
     {
       "name": "top-cities-90-days",
       "frequency": "daily",
       "query": {
-        "dimensions": ["ga:city"],
+        "dimensions": ["ga:city", "ga:region"],
         "metrics": ["ga:sessions"],
         "start-date": "90daysAgo",
         "end-date": "yesterday",
@@ -450,48 +560,71 @@
         "description": "90 days of city visits for all sites."
       }
     },
-    
     {
-      "name": "top-downloads-yesterday",
+      "name": "all-pages-yesterday",
       "frequency": "daily",
       "query": {
-        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath", "ga:hostname"],
-        "metrics": ["ga:totalEvents"],
-        "filters": [
-          "ga:eventCategory=~ownload",
-          "ga:pagePath!~(usps.com).*\/(?i)(zip|doc).*"
-        ],
+        "dimensions": ["ga:date", "ga:hostname", "ga:pagePath", "ga:pageTitle"],
+        "metrics": [ "ga:sessions",
+          "ga:percentNewSessions",
+          "ga:pageviews",
+          "ga:uniquePageviews",
+          "ga:avgTimeOnPage",
+          "ga:avgPageLoadTime",
+          "ga:entrances",
+          "ga:bounces",
+          "ga:exits",
+          "ga:users",
+          "ga:pageviewsPerSession",
+          "ga:avgSessionDuration"],
         "start-date": "yesterday",
         "end-date": "yesterday",
-        "sort": "-ga:totalEvents",
-        "max-results": "100"
+        "sort": "-ga:sessions"
       },
       "meta": {
-        "name": "Top Downloads Yesterday",
-        "description": "Top downloads yesterday"
+        "name": "All Pages (Yesterday)",
+        "description": "Data regarding each and every page for yesterday."
       }
     },
     {
-      "name": "top-downloads-7-days",
+      "name": "all-pages-7-days",
       "frequency": "daily",
       "query": {
-        "dimensions": ["ga:pageTitle", "ga:eventLabel", "ga:pagePath", "ga:hostname"],
-        "metrics": ["ga:totalEvents"],
-        "filters": [
-          "ga:eventCategory=~ownload",
-          "ga:eventLabel!~swf$",
-          "ga:pagePath!~(usps.com).*\/(?i)(zip|doc).*"
-        ],
+        "dimensions": ["ga:hostname", "ga:pagePath", "ga:pageTitle"],
+        "metrics": [ "ga:pageviews",
+          "ga:sessions",
+          "ga:users",
+          "ga:pageviewsPerSession",
+          "ga:avgSessionDuration",
+          "ga:exits"],
         "start-date": "7daysAgo",
         "end-date": "yesterday",
-        "sort": "-ga:totalEvents",
-        "max-results": "100"
+        "sort": "-ga:sessions"
       },
       "meta": {
-        "name": "Top Downloads (7 Days)",
-        "description": "Top downloads in the last 7 days."
+        "name": "All Pages (7 Days)",
+        "description": "Last 7 days all pages, measured by sessions, for all sites."
+      }
+    },
+    {
+      "name": "all-pages-30-days",
+      "frequency": "daily",
+      "query": {
+        "dimensions": ["ga:hostname", "ga:pagePath", "ga:pageTitle"],
+        "metrics": [ "ga:pageviews",
+          "ga:sessions",
+          "ga:users",
+          "ga:pageviewsPerSession",
+          "ga:avgSessionDuration",
+          "ga:exits"],
+        "start-date": "7daysAgo",
+        "end-date": "yesterday",
+        "sort": "-ga:sessions"
+      },
+      "meta": {
+        "name": "All Pages (30 Days)",
+        "description": "Last 30 days all pages, measured by sessions, for all sites."
       }
     }
-
   ]
 }
