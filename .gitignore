@@ -1,4 +1,7 @@
 .DS_Store
+.gitconfig
+.ssh/
+.viminfo
 *.p12
 *.pem
 /node_modules
